@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Nav = styled.nav`
@@ -47,13 +47,13 @@ const Item = styled.li`
     color: ${(props) => props.theme.white.lighter};
   }
 `;
-
+/*
 const Search = styled.span`
   color: white;
   svg {
     height: 25px;
   }
-`;
+`;*/
 const Circle = styled.span`
   position: absolute;
   width: 5px;
@@ -79,6 +79,8 @@ const logoVariants = {
 };
 
 export default function Header() {
+  const homeMatch = useMatch("/");
+  const seriesMatch = useMatch("/series");
   return (
     <Nav>
       <Col>
@@ -95,10 +97,10 @@ export default function Header() {
         </Logo>
         <Items>
           <Link to="/">
-            <Item>Home</Item>
+            <Item>Home{homeMatch && <Circle />}</Item>
           </Link>
           <Link to="series">
-            <Item>Series</Item>
+            <Item>Series{seriesMatch && <Circle />}</Item>
           </Link>
         </Items>
       </Col>
